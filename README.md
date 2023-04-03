@@ -21,6 +21,7 @@
   - 랭킹 등록 기능
   
 UI
+
 ![image](https://user-images.githubusercontent.com/70666642/229501624-9c220349-43c8-49c8-9598-7d0e8dc0690d.png)
 
 
