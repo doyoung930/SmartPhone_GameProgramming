@@ -25,7 +25,7 @@ UI
 ![image](https://user-images.githubusercontent.com/70666642/229501624-9c220349-43c8-49c8-9598-7d0e8dc0690d.png)
 
 
-예상 게임름흐름
+예상 게임흐름
 ![image](https://user-images.githubusercontent.com/70666642/229501442-8c93874e-bdc0-4113-9ab0-07c7acfed78b.png)
 
 1주차
