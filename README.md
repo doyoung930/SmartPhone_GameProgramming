@@ -20,6 +20,9 @@
 
   - 랭킹 등록 기능
 
+예상 게임름흐름
+![image](https://user-images.githubusercontent.com/70666642/229501442-8c93874e-bdc0-4113-9ab0-07c7acfed78b.png)
+
 1주차
 	- 코딩하기 앞서 프레임워크 제작 및 레벨 디자인
   
