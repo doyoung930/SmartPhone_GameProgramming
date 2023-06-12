@@ -13,10 +13,10 @@ import com.sgpggame.project.framework.RecycleBin;
 public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     private static final String TAG = Enemy.class.getSimpleName();
     private static final int[] resIds = {
-            R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1,
-            R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1,
-            R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1,
-            R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1, R.mipmap.meteor1
+            R.mipmap.meteor1, R.mipmap.meteor2, R.mipmap.meteor3, R.mipmap.meteor4, R.mipmap.meteor5,
+            R.mipmap.meteor6, R.mipmap.meteor7, R.mipmap.meteor8, R.mipmap.meteor9, R.mipmap.meteor10,
+            R.mipmap.meteor11, R.mipmap.meteor12, R.mipmap.meteor13, R.mipmap.meteor14, R.mipmap.meteor15,
+            R.mipmap.meteor16, R.mipmap.meteor17, R.mipmap.meteor18, R.mipmap.meteor19, R.mipmap.meteor20
     };
     public static final int MAX_LEVEL = resIds.length - 1;
     private static final float SPEED = 2.0f;

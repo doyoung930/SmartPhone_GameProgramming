@@ -1,5 +1,6 @@
 package com.sgpggame.project.game;
 
+import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.graphics.Paint;
 import android.util.Log;
@@ -12,6 +13,8 @@ import com.sgpggame.project.framework.IRecyclable;
 import com.sgpggame.project.framework.RecycleBin;
 
 public class Bullet extends Sprite implements IBoxCollidable, IRecyclable {
+    private Bitmap targetBitmap;
+    private RectF targetRect = new RectF();
     private static final float BULLET_WIDTH = 28 * 0.03f;
     private static final float BULLET_HEIGHT = 40 * 0.03f;
     private static final String TAG = Bullet.class.getSimpleName();
