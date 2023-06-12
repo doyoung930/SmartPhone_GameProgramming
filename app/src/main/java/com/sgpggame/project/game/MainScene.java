@@ -22,7 +22,7 @@ public class MainScene extends BaseScene {
         initLayers(Layer.COUNT);
         fighter = new Fighter();
         add(Layer.player, fighter);
-        add(Layer.bg, new Background(R.mipmap.space));
+        add(Layer.bg, new VertScrollBackground(R.mipmap.space, 1.0f));
         //add(Layer.bg, new Background(R.mipmap.clouds));
         score = new Score();
         add(Layer.ui, score);
