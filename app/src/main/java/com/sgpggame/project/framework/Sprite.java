@@ -3,8 +3,10 @@ package com.sgpggame.project.framework;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.Log;
 
 public class Sprite implements IGameObject {
+    private static final String TAG = Sprite.class.getSimpleName();
     protected Bitmap bitmap;
     protected RectF dstRect = new RectF();
     protected float x, y, width, height;
@@ -17,23 +19,19 @@ public class Sprite implements IGameObject {
             setBitmapResource(bitmapResId);
         }
         fixDstRect();
+        Log.v(TAG, "Created " + this.getClass().getSimpleName() + "@" + System.identityHashCode(this));
     }
-
     protected void setBitmapResource(int bitmapResId) {
-
         bitmap = BitmapPool.get(bitmapResId);
     }
-
     protected void fixDstRect() {
         float half_width = width / 2;
         float half_height = height / 2;
         dstRect.set(x - half_width, y - half_height, x + half_width, y + half_height);
     }
-
     @Override
     public void update() {
     }
-
     @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(bitmap, null, dstRect, null);

@@ -10,82 +10,80 @@ import com.sgpggame.project.framework.BitmapPool;
 import com.sgpggame.project.framework.Sprite;
 
 public class Fighter extends Sprite {
-
     private static final float FIGHTER_X = 4.5f;
     private static final float FIGHTER_Y = 14.8f;
     private static final float FIGHTER_WIDTH = 72 * 0.0243f; //1.75f;
     private static final float FIGHTER_HEIGHT = 80 * 0.0243f; //1.75f;
-
-    private static final float SPARK_WIDTH = 50 * 0.0243f;
-    private static final float SPARK_HEIGHT = 30 * 0.0243f;
-    private static final float FIRE_INTERVAL = 0.5f;
-
+    private static final float TARGET_RADIUS = 0.5f;
+    private static final float SPEED = 10.0f;
+    private static final float FIGHTER_LEFT = FIGHTER_WIDTH / 2;
+    private static final float FIGHTER_RIGHT = 9.0f - FIGHTER_WIDTH / 2;
+    private float tx;
     private Bitmap targetBitmap;
     private RectF targetRect = new RectF();
-
-    private float tx, ty; // touch event 를 받은 위치. 이 위치를 향해서 움직인다
-    private float dx, dy; // 1초간 움직여야 할 양: dx = SPEED*cos(r); dy = SPEED*sin(r);
-    private static float SPEED = 10.0f;
-    private float angle;
-
+    private Bitmap sparkBitmap;
+    private RectF sparkRect = new RectF();
+    private static final float SPARK_WIDTH = 50 * 0.0243f;
+    private static final float SPARK_HEIGHT = 30 * 0.0243f;
+    private static final float SPARK_OFFSET = 0.7f;
+    private static final float FIRE_INTERVAL = 0.25f;
+    private static final float SPARK_DURATION = 0.1f;
     private float accumulatedTime;
-
     public Fighter() {
-        super(R.mipmap.earth, FIGHTER_X, FIGHTER_Y, FIGHTER_WIDTH, FIGHTER_HEIGHT);
-
+        super(R.mipmap.earth2, FIGHTER_X, FIGHTER_Y, FIGHTER_WIDTH, FIGHTER_HEIGHT);
+        targetBitmap = BitmapPool.get(R.mipmap.target);
+        sparkBitmap = BitmapPool.get(R.mipmap.boom);
+        tx = x;
     }
-
-    @Override
-    public void update() {
-        float time = BaseScene.frameTime;
-        x += dx * time;
-        if ((dx > 0 && x > tx) || (dx < 0 && x < tx)) {
-            x = tx; dx = 0;
-        }
-        this.y += this.dy * time;
-        if ((dy > 0 && y > ty) || (dy < 0 && y < ty)) {
-            y = ty; dy = 0;
-        }
-        fixDstRect();
-        checkFire();
-    }
-
-    @Override
-    public void draw(Canvas canvas) {
-        canvas.save();
-        canvas.rotate(angle, x, y);
-        canvas.drawBitmap(bitmap, null, dstRect, null);
-        canvas.restore();
-        if (dx != 0 || dy != 0) {
-            float r = 1.0f;
-            targetRect.set(tx - r, ty - r, tx + r, ty + r);
-            canvas.drawBitmap(targetBitmap, null, targetRect, null);
-        }
-    }
-
     public void setTargetPosition(float tx, float ty) {
         this.tx = tx;
-        this.ty = ty;
-        float dx = tx - this.x;
-        float dy = ty - this.y;
-        double radian = Math.atan2(dy, dx);
-        this.dx = (float) (SPEED * Math.cos(radian));
-        this.dy = (float) (SPEED * Math.sin(radian));
-        angle = (float) Math.toDegrees(radian) + 90;
+        targetRect.set(
+                tx - TARGET_RADIUS, FIGHTER_Y - TARGET_RADIUS,
+                tx + TARGET_RADIUS, FIGHTER_Y + TARGET_RADIUS);
     }
-
     private void checkFire() {
         accumulatedTime += BaseScene.frameTime;
         if (accumulatedTime < FIRE_INTERVAL) {
             return;
         }
-
         accumulatedTime -= FIRE_INTERVAL;
         //accumulatedTime = 0; // ??
         fire();
     }
     public void fire() {
-        Bullet bullet = new Bullet(x, y);
-        BaseScene.getTopScene().add(bullet);
+        Bullet bullet = Bullet.get(x, y);
+        BaseScene.getTopScene().add(MainScene.Layer.bullet.ordinal(), bullet);
+    }
+    @Override
+    public void update() {
+        super.update();
+        float time = BaseScene.frameTime;
+        if (tx >= x) {
+            x += SPEED * time;
+            if (x > tx) {
+                x = tx;
+            }
+        } else {
+            x -= SPEED * time;
+            if (x < tx) {
+                x = tx;
+            }
+        }
+        if (x < FIGHTER_LEFT) x = tx = FIGHTER_LEFT;
+        if (x > FIGHTER_RIGHT) x = tx = FIGHTER_RIGHT;
+        fixDstRect();
+        checkFire();
+    }
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+        if (tx != x) {
+            canvas.drawBitmap(targetBitmap, null, targetRect, null);
+        }
+        if (accumulatedTime < SPARK_DURATION) {
+            sparkRect.set(x - SPARK_WIDTH/2, y - SPARK_HEIGHT/2 - SPARK_OFFSET,
+                    x + SPARK_WIDTH/2, y + SPARK_HEIGHT/2 - SPARK_OFFSET);
+            canvas.drawBitmap(sparkBitmap, null, sparkRect, null);
+        }
     }
 }
