@@ -36,17 +36,18 @@ public class BaseScene {
         stack.remove(this);
         // TODO: additional callback should be called
     }
-    protected void initLayers(int layerCount) {
+    protected <E extends Enum<E>> void initLayers(E countEnum) {
+        int layerCount = countEnum.ordinal();
         layers = new ArrayList<>();
         for (int i = 0; i < layerCount; i++) {
             layers.add(new ArrayList<>());
         }
     }
-    public void add(int layerIndex, IGameObject gobj) {
+    public <E extends Enum<E>> void add(E layerEnum, IGameObject gobj) {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                ArrayList<IGameObject> objects = layers.get(layerIndex);
+                ArrayList<IGameObject> objects = layers.get(layerEnum.ordinal());
                 objects.add(gobj);
             }
         });
@@ -89,6 +90,10 @@ public class BaseScene {
         }
     }
     protected ArrayList<ArrayList<IGameObject>> layers = new ArrayList<>();
+    public <E extends Enum> ArrayList<IGameObject> getObjectsAt(E layerEnum) {
+        return layers.get(layerEnum.ordinal());
+    }
+
     public boolean onTouchEvent(MotionEvent event) {
         return false;
     }

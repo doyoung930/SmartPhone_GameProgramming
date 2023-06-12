@@ -10,6 +10,8 @@ import com.sgpggame.project.framework.IBoxCollidable;
 import com.sgpggame.project.framework.BaseScene;
 import com.sgpggame.project.framework.IRecyclable;
 import com.sgpggame.project.framework.RecycleBin;
+import com.sgpggame.project.framework.BitmapPool;
+
 public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     private static final String TAG = Enemy.class.getSimpleName();
     private static final int[] resIds = {
@@ -21,6 +23,8 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     public static final int MAX_LEVEL = resIds.length - 1;
     private static final float SPEED = 2.0f;
     public static final float SIZE = 1.8f;
+    private int level;
+
     protected RectF collisionRect = new RectF();
     //    protected static ArrayList<Enemy> recycleBin = new ArrayList<>();
     static Enemy get(int index, int level) {
@@ -28,12 +32,18 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
         if (enemy != null) {
             enemy.x = (Metrics.game_width / 10) * (2 * index + 1);
             enemy.y = -SIZE;
+            if (level != enemy.level) {
+                enemy.level = level;
+                enemy.bitmap = BitmapPool.get(resIds[level]); // 오래된 버그. 재사용시 비트맵도 바꾸어 주어야 한다
+            }
             return enemy;
         }
         return new Enemy(index, level);
     }
     private Enemy(int index, int level) {
+
         super(resIds[level], (Metrics.game_width / 10) * (2 * index + 1), -SIZE, SIZE, SIZE, 10, 0);
+        this.level = level;
     }
     @Override
     public void update() {
@@ -52,5 +62,8 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     }
     @Override
     public void onRecycle() {
+    }
+    public int getScore() {
+        return 10 * (level + 1);
     }
 }

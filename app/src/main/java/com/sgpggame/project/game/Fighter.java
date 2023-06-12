@@ -52,7 +52,7 @@ public class Fighter extends Sprite {
     }
     public void fire() {
         Bullet bullet = Bullet.get(x, y);
-        BaseScene.getTopScene().add(MainScene.Layer.bullet.ordinal(), bullet);
+        BaseScene.getTopScene().add(MainScene.Layer.bullet, bullet);
     }
     @Override
     public void update() {

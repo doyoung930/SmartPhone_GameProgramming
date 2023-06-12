@@ -1,4 +1,4 @@
-package com.sgpggame.project.game;
+package com.sgpggame.project.framework;
 
 import android.graphics.RectF;
 import com.sgpggame.project.framework.IBoxCollidable;
