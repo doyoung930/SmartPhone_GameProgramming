@@ -20,6 +20,7 @@ public class Sprite implements IGameObject {
     }
 
     protected void setBitmapResource(int bitmapResId) {
+
         bitmap = BitmapPool.get(bitmapResId);
     }
 

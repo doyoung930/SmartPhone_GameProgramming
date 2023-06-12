@@ -10,6 +10,11 @@ import com.sgpggame.project.framework.BitmapPool;
 import com.sgpggame.project.framework.Sprite;
 
 public class Fighter extends Sprite {
+
+    private static final float FIGHTER_X = 4.5f;
+    private static final float FIGHTER_Y = 14.8f;
+    private static final float FIGHTER_SIZE = 1.75f;
+
     private static final float RADIUS = 1.25f;
     private static final float FIRE_INTERVAL = 0.5f;
 
@@ -23,10 +28,9 @@ public class Fighter extends Sprite {
     private float accumulatedTime;
 
     public Fighter() {
-        super(R.mipmap.plane_240, 4.5f, 12.0f, 2*RADIUS, 2*RADIUS);
-        tx = x; ty = y; dx = dy = 0;
+        super(R.mipmap.earth, FIGHTER_X, FIGHTER_Y, FIGHTER_SIZE, FIGHTER_SIZE);
 
-        targetBitmap = BitmapPool.get(R.mipmap.target);
+
     }
 
     @Override

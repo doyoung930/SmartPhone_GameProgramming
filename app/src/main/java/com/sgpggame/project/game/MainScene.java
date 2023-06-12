@@ -1,9 +1,7 @@
 package com.sgpggame.project.game;
 
 import android.view.MotionEvent;
-
 import java.util.Random;
-
 import com.sgpggame.project.framework.BaseScene;
 import com.sgpggame.project.framework.Metrics;
 
@@ -31,9 +29,7 @@ public class MainScene extends BaseScene {
                 float x = Metrics.toGameX(event.getX());
                 float y = Metrics.toGameY(event.getY());
                 fighter.setTargetPosition(x, y);
-//                if (action == MotionEvent.ACTION_DOWN) {
-//                    fighter.fire();
-//                }
+
                 return true;
         }
         return super.onTouchEvent(event);
