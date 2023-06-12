@@ -12,7 +12,7 @@ public class EnemyGenerator implements IGameObject {
     private int wave;
     @Override
     public void update() {
-        time += BaseScene.frameTime;
+        time += BaseScene.frameTime * 5;
         if (time > GEN_INTERVAL) {
             generate();
             time -= GEN_INTERVAL;

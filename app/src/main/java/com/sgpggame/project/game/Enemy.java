@@ -12,7 +12,7 @@ public class Enemy extends Sprite implements IBoxCollidable {
             R.mipmap.meteor1, R.mipmap.meteor2, R.mipmap.meteor3, R.mipmap.meteor4, R.mipmap.unsuck
     };
     public static final int MAX_LEVEL = resIds.length - 1;
-    private static final float SPEED = 1.0f;
+    private static final float SPEED = 2.0f;
 
     public static final float SIZE = 1.8f;
     protected RectF collisionRect = new RectF();
