@@ -13,9 +13,11 @@ public class Fighter extends Sprite {
 
     private static final float FIGHTER_X = 4.5f;
     private static final float FIGHTER_Y = 14.8f;
-    private static final float FIGHTER_SIZE = 1.75f;
+    private static final float FIGHTER_WIDTH = 72 * 0.0243f; //1.75f;
+    private static final float FIGHTER_HEIGHT = 80 * 0.0243f; //1.75f;
 
-    private static final float RADIUS = 1.25f;
+    private static final float SPARK_WIDTH = 50 * 0.0243f;
+    private static final float SPARK_HEIGHT = 30 * 0.0243f;
     private static final float FIRE_INTERVAL = 0.5f;
 
     private Bitmap targetBitmap;
@@ -25,11 +27,11 @@ public class Fighter extends Sprite {
     private float dx, dy; // 1초간 움직여야 할 양: dx = SPEED*cos(r); dy = SPEED*sin(r);
     private static float SPEED = 10.0f;
     private float angle;
+
     private float accumulatedTime;
 
     public Fighter() {
-        super(R.mipmap.earth, FIGHTER_X, FIGHTER_Y, FIGHTER_SIZE, FIGHTER_SIZE);
-
+        super(R.mipmap.earth, FIGHTER_X, FIGHTER_Y, FIGHTER_WIDTH, FIGHTER_HEIGHT);
 
     }
 
@@ -83,7 +85,7 @@ public class Fighter extends Sprite {
         fire();
     }
     public void fire() {
-        Bullet bullet = new Bullet(x, y, angle);
+        Bullet bullet = new Bullet(x, y);
         BaseScene.getTopScene().add(bullet);
     }
 }
