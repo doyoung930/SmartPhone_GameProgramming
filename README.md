@@ -63,6 +63,7 @@ UI
   - Chat GPT
   - https://www.youtube.com/watch?v=SeGpm0VryrY&list=PLGeojcNAoQP67qwAu8qtw9CIdszMQTAvm
   - https://www.youtube.com/watch?v=i-Wg6oc8X04&list=PLzwv79bkcmnPOObsWI7Ygp8bOKj3vM0TZ
+  
   수업내용에서 차용한 것
   - 드래곤 플라이트에서 차용하여 에너미가 떨어지는 것 마우스 포인터 좌표를 사용하였습니다.
 
