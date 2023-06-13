@@ -30,7 +30,7 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     static Enemy get(int index, int level) {
         Enemy enemy = (Enemy) RecycleBin.get(Enemy.class);
         if (enemy != null) {
-            enemy.x = (Metrics.game_width / 10) * (2 * index + 1);
+            enemy.x = (Metrics.game_width / 10) * (2 * 2 + 1);
             enemy.y = -SIZE;
             if (level != enemy.level) {
                 enemy.level = level;
@@ -48,7 +48,7 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     @Override
     public void update() {
         super.update();
-        y += SPEED * BaseScene.frameTime;
+        y += SPEED * BaseScene.frameTime +level*SPEED*BaseScene.frameTime;
         fixDstRect();
         if (dstRect.top > 16.0) {
             BaseScene.getTopScene().remove(this);
